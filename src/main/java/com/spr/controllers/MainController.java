@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value = "/")
 public class MainController {
 
-    @RequestMapping(value = "/start", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/start"}, method = RequestMethod.GET)
     public String start(Model model){
         return "index";
     }

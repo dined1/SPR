@@ -15,4 +15,9 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public User findByLogin(String login){
+        return null;
+    }
+
 }
