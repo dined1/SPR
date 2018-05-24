@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +30,19 @@
 <body>
 
 <div class="container" style="width: 300px;">
-    <form action="${pageContext.request.contextPath}/register" method="post">
+    <form:form modelAttribute="userForm" class="form-signin" method="post">
         <h2 class="form-signin-heading">Регистрация</h2>
-        <input type="text" class="form-control" name="j_username" placeholder="Login">
-        <input type="password" class="form-control" name="j_password" placeholder="Password" required value="12345678">
-        <input type="password" class="form-control" name="j_password" placeholder="Repeat Password" required value="12345678">
+        <spring:bind path="login">
+            <form:input path="login" type="text" class="form-control" name="login" placeholder="Login"/>
+        </spring:bind>
+        <spring:bind path="password">
+            <form:input path="password" type="password" class="form-control" name="password" placeholder="Password"/>
+        </spring:bind>
+        <spring:bind path="passwordConfirm">
+            <form:input path="passwordConfirm" type="password" class="form-control" name="passwordConfirm" placeholder="Repeat Password"/>
+        </spring:bind>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-    </form>
+    </form:form>
 </div>
 
 </body>
