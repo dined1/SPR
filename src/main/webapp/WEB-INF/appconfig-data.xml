@@ -12,11 +12,11 @@
 
 
     <!-- Configure the data source bean -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driverClassName}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/spr"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
     </bean>
 
     <!-- Configure the entity manager factory bean -->
@@ -24,8 +24,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan">
             <array>
-                <value>com.hellokoding.account.model</value>
-                <value>com.hellokoding.account.Models</value>
+                <value>com.spr.models</value>
             </array>
         </property>
         <property name="jpaVendorAdapter">
@@ -34,7 +33,7 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.id.new_generator_mappings">false</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>

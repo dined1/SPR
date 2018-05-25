@@ -1,8 +1,9 @@
 package com.spr.models;
 
-
+import javax.persistence.Entity;
 import java.util.Set;
 
+@Entity
 public class User {
 
     private Long id;
