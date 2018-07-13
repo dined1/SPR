@@ -1,8 +1,5 @@
 package com.spr.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,7 +22,6 @@ import java.util.Set;
 @Getter
 @Setter
 @Transactional
-@JsonFormat
 @NoArgsConstructor
 @ToString
 @Table(name = "user", schema = "spr")
