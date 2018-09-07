@@ -1,0 +1,43 @@
+<!--<?xml version='1.0' encoding='utf-8'?>-->
+<!--<!DOCTYPE hibernate-configuration PUBLIC-->
+    <!--"-//Hibernate/Hibernate Configuration DTD//EN"-->
+    <!--"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">-->
+<!--<hibernate-configuration>-->
+  <!--<session-factory>-->
+    <!--<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>-->
+    <!--<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>-->
+    <!--<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/spr</property>-->
+    <!--<property name="hibernate.connection.username">postgres</property>-->
+    <!--<property name="connection.password">root</property>-->
+    <!--&lt;!&ndash; DB schema will be updated if needed &ndash;&gt;-->
+    <!--<property name="hbm2ddl.auto">create</property>-->
+    <!--<mapping class="com.spr.models.OrdItemCharacteristic"/>-->
+    <!--<mapping class="com.spr.models.Role"/>-->
+    <!--<mapping class="com.spr.models.ItemLocations"/>-->
+    <!--<mapping class="com.spr.models.OrdItemDiscount"/>-->
+    <!--<mapping class="com.spr.models.RelatedLocation"/>-->
+    <!--<mapping class="com.spr.models.Payment"/>-->
+    <!--<mapping class="com.spr.models.Itemgroup"/>-->
+    <!--<mapping class="com.spr.models.So"/>-->
+    <!--<mapping class="com.spr.models.Characteristics"/>-->
+    <!--<mapping class="com.spr.models.Item"/>-->
+    <!--<mapping class="com.spr.models.Statisticscollector"/>-->
+    <!--<mapping class="com.spr.models.Address"/>-->
+    <!--<mapping class="com.spr.models.Groups"/>-->
+    <!--<mapping class="com.spr.models.User"/>-->
+    <!--<mapping class="com.spr.models.Discountrule"/>-->
+    <!--<mapping class="com.spr.models.ItemCharacteristic"/>-->
+    <!--<mapping class="com.spr.models.ProductItems"/>-->
+    <!--<mapping class="com.spr.models.Itemdiscount"/>-->
+    <!--<mapping class="com.spr.models.Paymentbill"/>-->
+    <!--<mapping class="com.spr.models.Location"/>-->
+    <!--<mapping class="com.spr.models.Locations"/>-->
+    <!--<mapping class="com.spr.models.OrdItem"/>-->
+    <!--<mapping class="com.spr.models.Account"/>-->
+    <!--<mapping class="com.spr.models.Soproduct"/>-->
+    <!--<mapping class="com.spr.models.User"/>-->
+    <!--<mapping class="com.spr.models.Paymenttype"/>-->
+    <!--<mapping class="com.spr.models.Customer"/>-->
+    <!--<mapping class="com.spr.models.PayUser"/>-->
+  <!--</session-factory>-->
+<!--</hibernate-configuration>-->

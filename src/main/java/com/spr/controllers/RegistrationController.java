@@ -35,14 +35,14 @@ public class RegistrationController {
         model.addAttribute("userForm", new User());
         return "registration";
     }
-
-    @PostMapping(value = "/register")
-    public String newUser(@ModelAttribute("userForm") @Valid User userForm,
-                          BindingResult bindingResult){
-        userValidator.validate(userForm, bindingResult);
-        userService.save(userForm);
-        return "redirect:/start";
-    }
+//
+//    @PostMapping(value = "/register")
+//    public String newUser(@ModelAttribute("userForm") @Valid User userForm,
+//                          BindingResult bindingResult){
+//        userValidator.validate(userForm, bindingResult);
+//        userService.save(userForm);
+//        return "redirect:/start";
+//    }
 
     @GetMapping(value="/logout")
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {

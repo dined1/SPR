@@ -1,30 +1,29 @@
 package com.spr.controllers;
 
 import com.spr.models.User;
-import org.springframework.ui.Model;
+import com.spr.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RequestMapping("/api")
 @RestController
 public class LoginController {
 
-    @GetMapping("/login")
-    public String loginPage(Model model){
-        return "login";
+    private final UserRepository userRepository;
+
+    @Autowired
+    public LoginController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @PostMapping("/login")
-    public String loginage(){
-        return "login";
-    }
-
-    @RequestMapping(value = "/lon", method = RequestMethod.POST)
-    public String loginge(@RequestBody User user){
-        return null;
+    @GetMapping("/allUsers")
+    public List<User> getAllUsers(){
+        List<User> users = userRepository.findAll();
+        users.forEach(from -> from.setRoles(null));
+        return users;
     }
 }

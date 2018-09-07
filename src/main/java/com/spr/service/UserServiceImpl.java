@@ -1,39 +1,66 @@
 package com.spr.service;
 
-import com.spr.models.Role;
 import com.spr.models.User;
+import com.spr.models.UserDto;
 import com.spr.repositories.RoleRepository;
 import com.spr.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service(value = "userService")
+public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private BCryptPasswordEncoder bcryptEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
-                           RoleRepository roleRepository,
-                           BCryptPasswordEncoder bCryptPasswordEncoder) {
+                           RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
-    public User getUser(String login) {
-        User user = new User();
-        user.setLogin(login);
-        user.setPassword("$2a$10$HqMjaXcGHDba2Gx8NeTYEu.9K08R4IYHozRaQCX9ayDklcJEgGEGu");
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByLogin(username);
+        if(user == null){
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), getAuthority());
+    }
 
-        return user;
+    private List<SimpleGrantedAuthority> getAuthority() {
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> list = new ArrayList<>();
+        userRepository.findAll().iterator().forEachRemaining(list::add);
+        return list;
+    }
+
+    @Override
+    public void delete(long id) {
+        userRepository.delete(id);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findOne(id);
     }
 
     @Override
@@ -42,14 +69,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        Set<Role> rq = new HashSet<>();
-        Role role = roleRepository.findOne(1L);
-        role.getUsers().add(user);
-        rq.add(role);
-        user.setRoles(rq);
-        userRepository.save(user);
+    public User save(UserDto user) {
+        User newUser = new User();
+        newUser.setLogin(user.getUsername());
+        newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+        return userRepository.save(newUser);
     }
 
 }
